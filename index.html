@@ -9,81 +9,79 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
+  min-height:100vh;
   background:linear-gradient(180deg,#ffe3f0,#e9f7ff,#fff4fa);
-  height:100vh;
+  font-family:'Press Start 2P',cursive;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   overflow:hidden;
   color:#333;
-  font-family:'Press Start 2P',cursive;
 }
 
-/* mobile only */
-@media(min-width:768px){
-  body::before{
-    content:"Open on mobile 📱";
-    position:fixed;
-    inset:0;
-    background:#fff0f6;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#ff69b4;
-    font-size:1.2rem;
-    z-index:999;
-  }
+/* main container */
+.wrapper{
+  width:100%;
+  max-width:900px;
+  padding:20px;
 }
 
+/* page card */
 .page{
   display:none;
-  height:100vh;
-  padding:18px;
-  text-align:center;
 }
 .active{display:block}
 
 .panel{
-  background:rgba(255,255,255,0.92);
+  background:rgba(255,255,255,0.95);
   border:3px solid #ff9acb;
-  border-radius:18px;
-  padding:18px;
-  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+  border-radius:22px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
 }
 
 h1{
   font-family:'Pacifico',cursive;
-  font-size:2rem;
+  font-size:2.4rem;
   color:#ff69b4;
-  margin-bottom:10px;
+  margin-bottom:15px;
 }
 
 p{
-  font-size:0.6rem;
-  line-height:1.8;
+  font-size:0.7rem;
+  line-height:1.9;
 }
 
 /* heart button */
 .heart-btn{
-  margin:25px auto;
-  width:90px;
-  height:90px;
+  margin:30px auto;
+  width:100px;
+  height:100px;
   background:#ff9acb;
   border-radius:50%;
-  box-shadow:0 0 20px rgba(255,105,180,0.8);
+  box-shadow:0 0 25px rgba(255,105,180,0.9);
   display:flex;
   align-items:center;
   justify-content:center;
   cursor:pointer;
+  transition:transform 0.2s;
+}
+.heart-btn:hover{
+  transform:scale(1.08);
 }
 .heart-btn::after{
   content:'💖';
-  font-size:32px;
+  font-size:36px;
 }
 
 /* floating hearts */
 .heart{
   position:fixed;
   bottom:-20px;
-  font-size:18px;
+  font-size:20px;
   animation:float 6s linear infinite;
 }
 @keyframes float{
@@ -92,33 +90,41 @@ p{
 
 /* minecraft icons */
 .mc{
-  font-size:28px;
-  margin:10px 0;
+  font-size:34px;
+  margin:15px 0;
 }
 
-/* mini heart counter */
+/* mini heart game */
 #heartGame{
-  margin-top:10px;
-  padding:10px;
+  margin-top:20px;
+  padding:15px;
   border:2px dashed #ff9acb;
-  border-radius:12px;
+  border-radius:15px;
 }
 #count{
-  font-size:0.65rem;
-  margin-top:8px;
+  font-size:0.7rem;
+  margin-top:10px;
   color:#ff69b4;
 }
 
 .signature{
-  margin-top:15px;
+  margin-top:20px;
   font-family:'Pacifico',cursive;
   color:#ff69b4;
-  font-size:1.2rem;
+  font-size:1.4rem;
+}
+
+/* responsive text */
+@media(max-width:600px){
+  h1{font-size:2rem}
+  p{font-size:0.6rem}
 }
 </style>
 </head>
 
 <body>
+
+<div class="wrapper">
 
 <!-- PAGE 1 -->
 <div class="page active">
@@ -126,14 +132,14 @@ p{
     <h1>Hey you 💖</h1>
     <p>
       This little Minecraft-style world<br>
-      popped into existence just to say something.<br><br>
-      You’re one of those people<br>
-      who makes chats lighter<br>
-      and moments nicer.
+      exists for one simple reason.<br><br>
+      To remind you that<br>
+      you’re genuinely nice to be around<br>
+      and kind in a way that feels rare.
     </p>
 
     <div class="heart-btn" onclick="go(2)"></div>
-    <p style="font-size:0.5rem">Tap the heart</p>
+    <p style="font-size:0.55rem">Click the heart</p>
   </div>
 </div>
 
@@ -144,10 +150,10 @@ p{
     <div class="mc">🧱 💗 ⛏️</div>
     <p>
       Minecraft worlds are fun,<br>
-      but people make them memorable.<br><br>
+      but it’s the people that make them memorable.<br><br>
       And honestly?<br>
-      You’re kind of one of those<br>
-      *rare good ones.*
+      You’re one of those people<br>
+      who makes things feel lighter.
     </p>
 
     <div class="heart-btn" onclick="go(3)"></div>
@@ -159,10 +165,10 @@ p{
   <div class="panel">
     <h1>A little flirty 😌</h1>
     <p>
-      Not gonna lie —<br>
-      if kindness was an enchantment,<br>
-      you’d be max-level already.<br><br>
-      Just saying… that’s pretty cool.
+      If good vibes were enchantments,<br>
+      you’d definitely be running<br>
+      a max-level setup.<br><br>
+      Not even exaggerating.
     </p>
 
     <div class="heart-btn" onclick="go(4)"></div>
@@ -175,13 +181,13 @@ p{
     <h1>Collect hearts 💕</h1>
 
     <div id="heartGame">
-      <p>Tap the heart to collect good vibes</p>
+      <p>Click the heart to collect good vibes</p>
       <div class="heart-btn" onclick="addHeart()"></div>
       <div id="count">Hearts collected: 0</div>
     </div>
 
     <div class="heart-btn" onclick="go(5)"></div>
-    <p style="font-size:0.5rem">One last note…</p>
+    <p style="font-size:0.55rem">One last thing…</p>
   </div>
 </div>
 
@@ -190,16 +196,18 @@ p{
   <div class="panel">
     <h1>Just so you know 💗</h1>
     <p>
-      This isn’t about anything dramatic.<br><br>
-      Just a quiet reminder that<br>
+      This isn’t about anything complicated.<br><br>
+      Just a warm reminder that<br>
       you’re appreciated,<br>
-      you’re warm-hearted,<br>
-      and you make things better<br>
-      just by being around.
+      you matter more than you realize,<br>
+      and you make spaces better<br>
+      just by being in them.
     </p>
 
     <div class="signature">— pwkie</div>
   </div>
+</div>
+
 </div>
 
 <script>
