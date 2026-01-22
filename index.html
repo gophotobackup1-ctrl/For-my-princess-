@@ -21,48 +21,36 @@ body{
   color:#333;
 }
 
-/* main container */
-.wrapper{
-  width:100%;
+.card{
+  width:90%;
   max-width:900px;
-  padding:20px;
-}
-
-/* page card */
-.page{
-  display:none;
-}
-.active{display:block}
-
-.panel{
-  background:rgba(255,255,255,0.95);
+  background:rgba(255,255,255,0.96);
   border:3px solid #ff9acb;
   border-radius:22px;
-  padding:30px;
+  padding:35px;
   text-align:center;
   box-shadow:0 20px 40px rgba(0,0,0,0.15);
 }
 
 h1{
   font-family:'Pacifico',cursive;
-  font-size:2.4rem;
+  font-size:2.5rem;
   color:#ff69b4;
-  margin-bottom:15px;
+  margin-bottom:20px;
 }
 
 p{
-  font-size:0.7rem;
+  font-size:0.75rem;
   line-height:1.9;
 }
 
-/* heart button */
 .heart-btn{
   margin:30px auto;
-  width:100px;
-  height:100px;
+  width:110px;
+  height:110px;
   background:#ff9acb;
   border-radius:50%;
-  box-shadow:0 0 25px rgba(255,105,180,0.9);
+  box-shadow:0 0 30px rgba(255,105,180,0.9);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -70,14 +58,12 @@ p{
   transition:transform 0.2s;
 }
 .heart-btn:hover{
-  transform:scale(1.08);
+  transform:scale(1.1);
 }
-.heart-btn::after{
-  content:'💖';
-  font-size:36px;
+.heart-btn span{
+  font-size:38px;
 }
 
-/* floating hearts */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -88,33 +74,13 @@ p{
   to{transform:translateY(-120vh);opacity:0}
 }
 
-/* minecraft icons */
-.mc{
-  font-size:34px;
-  margin:15px 0;
-}
-
-/* mini heart game */
-#heartGame{
-  margin-top:20px;
-  padding:15px;
-  border:2px dashed #ff9acb;
-  border-radius:15px;
-}
-#count{
-  font-size:0.7rem;
-  margin-top:10px;
-  color:#ff69b4;
-}
-
 .signature{
-  margin-top:20px;
+  margin-top:25px;
   font-family:'Pacifico',cursive;
   color:#ff69b4;
-  font-size:1.4rem;
+  font-size:1.6rem;
 }
 
-/* responsive text */
 @media(max-width:600px){
   h1{font-size:2rem}
   p{font-size:0.6rem}
@@ -124,96 +90,70 @@ p{
 
 <body>
 
-<div class="wrapper">
+<div class="card">
+  <h1 id="title">Hey you 💖</h1>
+  <p id="text">
+    This little Minecraft-style world exists<br>
+    just to say something simple.<br><br>
+    You’re genuinely nice to be around,<br>
+    and that kind of energy matters more<br>
+    than you probably realize.
+  </p>
 
-<!-- PAGE 1 -->
-<div class="page active">
-  <div class="panel">
-    <h1>Hey you 💖</h1>
-    <p>
-      This little Minecraft-style world<br>
-      exists for one simple reason.<br><br>
-      To remind you that<br>
-      you’re genuinely nice to be around<br>
-      and kind in a way that feels rare.
-    </p>
-
-    <div class="heart-btn" onclick="go(2)"></div>
-    <p style="font-size:0.55rem">Click the heart</p>
+  <div class="heart-btn" onclick="next()">
+    <span>💖</span>
   </div>
-</div>
 
-<!-- PAGE 2 -->
-<div class="page">
-  <div class="panel">
-    <h1>Soft vibes ✨</h1>
-    <div class="mc">🧱 💗 ⛏️</div>
-    <p>
-      Minecraft worlds are fun,<br>
-      but it’s the people that make them memorable.<br><br>
-      And honestly?<br>
-      You’re one of those people<br>
-      who makes things feel lighter.
-    </p>
-
-    <div class="heart-btn" onclick="go(3)"></div>
-  </div>
-</div>
-
-<!-- PAGE 3 -->
-<div class="page">
-  <div class="panel">
-    <h1>A little flirty 😌</h1>
-    <p>
-      If good vibes were enchantments,<br>
-      you’d definitely be running<br>
-      a max-level setup.<br><br>
-      Not even exaggerating.
-    </p>
-
-    <div class="heart-btn" onclick="go(4)"></div>
-  </div>
-</div>
-
-<!-- PAGE 4 -->
-<div class="page">
-  <div class="panel">
-    <h1>Collect hearts 💕</h1>
-
-    <div id="heartGame">
-      <p>Click the heart to collect good vibes</p>
-      <div class="heart-btn" onclick="addHeart()"></div>
-      <div id="count">Hearts collected: 0</div>
-    </div>
-
-    <div class="heart-btn" onclick="go(5)"></div>
-    <p style="font-size:0.55rem">One last thing…</p>
-  </div>
-</div>
-
-<!-- PAGE 5 -->
-<div class="page">
-  <div class="panel">
-    <h1>Just so you know 💗</h1>
-    <p>
-      This isn’t about anything complicated.<br><br>
-      Just a warm reminder that<br>
-      you’re appreciated,<br>
-      you matter more than you realize,<br>
-      and you make spaces better<br>
-      just by being in them.
-    </p>
-
-    <div class="signature">— pwkie</div>
-  </div>
-</div>
-
+  <p style="font-size:0.55rem">Click the heart</p>
 </div>
 
 <script>
-function go(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.page')[n-1].classList.add('active');
+const pages = [
+  {
+    title: "Hey you 💖",
+    text: `This little Minecraft-style world exists<br>
+    just to say something simple.<br><br>
+    You’re genuinely nice to be around,<br>
+    and that kind of energy matters more<br>
+    than you probably realize.`
+  },
+  {
+    title: "Soft vibes ✨",
+    text: `Minecraft worlds are fun,<br>
+    but it’s the people that make them memorable.<br><br>
+    And honestly?<br>
+    You’re one of those people<br>
+    who make things feel lighter.`
+  },
+  {
+    title: "A little flirty 😌",
+    text: `If good vibes were enchantments,<br>
+    you’d definitely be running<br>
+    a max-level setup.<br><br>
+    Not even exaggerating.`
+  },
+  {
+    title: "Just so you know 💗",
+    text: `This isn’t about anything complicated.<br><br>
+    Just a warm reminder that<br>
+    you’re appreciated,<br>
+    you matter more than you think,<br>
+    and you make spaces better<br>
+    just by being in them.`
+  },
+  {
+    title: "💖",
+    text: `<div class="signature">— pwkie</div>`
+  }
+];
+
+let index = 0;
+
+function next(){
+  index++;
+  if(index >= pages.length) index = pages.length - 1;
+  document.getElementById("title").innerHTML = pages[index].title;
+  document.getElementById("text").innerHTML = pages[index].text;
 }
 
 /* floating hearts */
@@ -226,14 +166,6 @@ setInterval(()=>{
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),7000);
 },700);
-
-/* heart counter */
-let hearts=0;
-function addHeart(){
-  hearts++;
-  document.getElementById("count").innerText =
-    "Hearts collected: "+hearts;
-}
 </script>
 
 </body>
