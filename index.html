@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just For You 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:linear-gradient(180deg,#ffe3f0,#e9f7ff,#fff4fa);
+  height:100vh;
+  overflow:hidden;
+  color:#333;
+  font-family:'Press Start 2P',cursive;
+}
+
+/* mobile only */
+@media(min-width:768px){
+  body::before{
+    content:"Open on mobile 📱";
+    position:fixed;
+    inset:0;
+    background:#fff0f6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#ff69b4;
+    font-size:1.2rem;
+    z-index:999;
+  }
+}
+
+.page{
+  display:none;
+  height:100vh;
+  padding:18px;
+  text-align:center;
+}
+.active{display:block}
+
+.panel{
+  background:rgba(255,255,255,0.92);
+  border:3px solid #ff9acb;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}
+
+h1{
+  font-family:'Pacifico',cursive;
+  font-size:2rem;
+  color:#ff69b4;
+  margin-bottom:10px;
+}
+
+p{
+  font-size:0.6rem;
+  line-height:1.8;
+}
+
+/* heart button */
+.heart-btn{
+  margin:25px auto;
+  width:90px;
+  height:90px;
+  background:#ff9acb;
+  border-radius:50%;
+  box-shadow:0 0 20px rgba(255,105,180,0.8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.heart-btn::after{
+  content:'💖';
+  font-size:32px;
+}
+
+/* floating hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  to{transform:translateY(-120vh);opacity:0}
+}
+
+/* minecraft icons */
+.mc{
+  font-size:28px;
+  margin:10px 0;
+}
+
+/* mini heart counter */
+#heartGame{
+  margin-top:10px;
+  padding:10px;
+  border:2px dashed #ff9acb;
+  border-radius:12px;
+}
+#count{
+  font-size:0.65rem;
+  margin-top:8px;
+  color:#ff69b4;
+}
+
+.signature{
+  margin-top:15px;
+  font-family:'Pacifico',cursive;
+  color:#ff69b4;
+  font-size:1.2rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active">
+  <div class="panel">
+    <h1>Hey you 💖</h1>
+    <p>
+      This little Minecraft-style world<br>
+      popped into existence just to say something.<br><br>
+      You’re one of those people<br>
+      who makes chats lighter<br>
+      and moments nicer.
+    </p>
+
+    <div class="heart-btn" onclick="go(2)"></div>
+    <p style="font-size:0.5rem">Tap the heart</p>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <div class="panel">
+    <h1>Soft vibes ✨</h1>
+    <div class="mc">🧱 💗 ⛏️</div>
+    <p>
+      Minecraft worlds are fun,<br>
+      but people make them memorable.<br><br>
+      And honestly?<br>
+      You’re kind of one of those<br>
+      *rare good ones.*
+    </p>
+
+    <div class="heart-btn" onclick="go(3)"></div>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <div class="panel">
+    <h1>A little flirty 😌</h1>
+    <p>
+      Not gonna lie —<br>
+      if kindness was an enchantment,<br>
+      you’d be max-level already.<br><br>
+      Just saying… that’s pretty cool.
+    </p>
+
+    <div class="heart-btn" onclick="go(4)"></div>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <div class="panel">
+    <h1>Collect hearts 💕</h1>
+
+    <div id="heartGame">
+      <p>Tap the heart to collect good vibes</p>
+      <div class="heart-btn" onclick="addHeart()"></div>
+      <div id="count">Hearts collected: 0</div>
+    </div>
+
+    <div class="heart-btn" onclick="go(5)"></div>
+    <p style="font-size:0.5rem">One last note…</p>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <div class="panel">
+    <h1>Just so you know 💗</h1>
+    <p>
+      This isn’t about anything dramatic.<br><br>
+      Just a quiet reminder that<br>
+      you’re appreciated,<br>
+      you’re warm-hearted,<br>
+      and you make things better<br>
+      just by being around.
+    </p>
+
+    <div class="signature">— pwkie</div>
+  </div>
+</div>
+
+<script>
+function go(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.page')[n-1].classList.add('active');
+}
+
+/* floating hearts */
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML='💗';
+  h.style.left=Math.random()*100+'vw';
+  h.style.animationDuration=4+Math.random()*3+'s';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},700);
+
+/* heart counter */
+let hearts=0;
+function addHeart(){
+  hearts++;
+  document.getElementById("count").innerText =
+    "Hearts collected: "+hearts;
+}
+</script>
+
+</body>
+</html>
